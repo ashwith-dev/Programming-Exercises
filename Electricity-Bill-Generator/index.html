@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Electricity Bill Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="parent">
+    <form id="mainDiv">
+      <h1>Electricity Bill Generator</h1>
+      <div id="contentDiv">
+        <div id="leftDiv">
+          <label for="mr">Metre Number</label>
+          <input type="number" id="mr" placeholder="Enter Your Metre Number">
+
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Enter Your Name">
+
+          <label for="cu">Current Unit</label>
+          <input type="number" id="cu" placeholder="Enter Current Unit">
+
+          <label for="pu">Previous Unit</label>
+          <input type="number" id="pu" placeholder="Enter Previous Unit">
+        </div>
+        <div id="rightDiv">
+          <div class="outputDiv">
+            <label>Amount</label>
+            <p id="amount"></p>
+          </div>
+          <div class="outputDiv">
+            <label>Subcharges</label>
+            <p id="subcharges"></p>
+          </div>
+          <div class="outputDiv">
+            <label>Total Bill</label>
+            <p id="total"></p>
+          </div>
+        </div>
+      </div>
+
+<!-- x      <button type="button" id="clearBtn">Clear</button>-->
+       <button type="reset" id="resetBtn" value="Reset Form">Reset Form</button>
+      </form>
+    </div>
+  <!-- JS -->
+  <script src="script.js"></script>
+</body>
+</html>
