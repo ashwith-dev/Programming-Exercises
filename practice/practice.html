@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p>This is a Document</p>
+        <p id="result"></p>
+        <p>Good Morning</p>
+    </div>
+    <script>
+        let name = window.prompt("Enter Your Name : ")
+
+        function print() {
+            document.getElementById("result").innerText = `Hello ${name}`;
+        }
+
+        setTimeout(print , 3000);
+
+        function repeat() {
+            console.log(`Hello ${name}`);
+        }
+
+        setInterval(repeat , 3000)
+    </script>
+</body>
+</html>
