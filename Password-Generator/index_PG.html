@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style_PG.css">
+</head>
+<body>
+    <div id="parentDiv">
+        <div id="mainDiv">
+            <h1 id="heading">Password Generator</h1>
+
+            <label for="length">Length Of Password : </label>
+            <input type="number" min="1" value="1" id="length">
+            <br><br>
+
+            <label for="upperCase">Do You Want To Include UpperCase In The Password : </label>
+            <input type="checkbox" id="upperCase">
+            <br><br>
+
+            <label for="lowerCase">Do You Want To Include LowerCase In The Password : </label>
+            <input type="checkbox" id="lowerCase">
+            <br><br>
+
+            <label for="numbers">Do You Want To Include Numbers In The Password : </label>
+            <input type="checkbox" id="numbers">
+            <br><br>
+
+            <label for="symbols">Do You Want To Include Special Characters In The Password : </label>
+            <input type="checkbox" id="symbols">
+            <br><br>
+
+            <button id="btn" onclick="passwordGenerator()">Generate Password </button>
+            <label for="result">Generated Password : </label>
+            <p id="result"></p>
+
+        
+
+        </div>
+    </div>
+    <script src="script_PG.js"></script>
+</body>
+</html>
