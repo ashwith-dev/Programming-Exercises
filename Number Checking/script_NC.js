@@ -4,23 +4,13 @@ const armstrongBtn = document.getElementById("armstrong");
 const palindromeBtn = document.getElementById("palindrome");
 const sumBtn = document.getElementById("sum");
 const reverseBtn = document.getElementById("reverse");
+const factorsBtn = document.getElementById("factors");
 
 const input = document.getElementById("numberInput");
 const output = document.getElementById("output");
-const yesBox = document.getElementById("yes");
-const noBox = document.getElementById("no");
 
-function resetColors() {
-  yesBox.style.backgroundColor = "black";
-  noBox.style.backgroundColor = "black";
-}
-
-function resetOutputBox() {
-  output.innerHTML = "";
-}
 
 function prime() {
-    resetColors();
 
     let num = parseInt(input.value);
 
@@ -34,36 +24,33 @@ function prime() {
     }
 
    if (isPrime) {
-    yesBox.style.backgroundColor = "lightgreen";
+    output.innerHTML = `${num} is a Prime Number`;
   } 
   else {
-    noBox.style.backgroundColor = "lightcoral";
+    output.innerHTML = `${num} is not a Prime Number`;
   }
 
-  resetOutputBox();
 }
 
 primeBtn.onclick = prime;
 
 function even() {
-    resetColors();
 
     let num = parseInt(input.value);
 
     if (num % 2 === 0) {
-        yesBox.style.backgroundColor = "lightgreen";
+        output.textContent = `${num} is a Even Number`;
     }
     else {
-        noBox.style.backgroundColor = "lightcoral"
+        output.textContent = `${num} is not a Even Number`;
     }
     
-    resetOutputBox();
 }
 
 evenBtn.onclick = even;
 
 function armstrong() {
-  resetColors();
+  
   let num = input.value;
   let power = num.length;
   let sum = 0;
@@ -73,19 +60,18 @@ function armstrong() {
   }
 
   if (sum === Number(num)) {
-    yesBox.style.backgroundColor = "lightgreen"
+    output.textContent = `${num} is a Armstrong Number`;
   }
   else {
-    noBox.style.backgroundColor = "lightcoral"
+    output.textContent = `${num} is a not Armstrong Number`;
   }
 
-  resetOutputBox();
 }
 
 armstrongBtn.onclick = armstrong;
 
 function palindrome() {
-  resetColors();
+ 
 
   let num = input.value;
   let palNum = "";
@@ -95,19 +81,18 @@ function palindrome() {
   }
 
   if ( num === palNum) {
-    yesBox.style.backgroundColor = "lightgreen";
+    output.textContent = `${num} is a Palindrome Number`;
   }
   else {
-    noBox.style.backgroundColor = "lightcoral"
+    output.textContent = `${num} is not a Palindrome Number`;
   }
   
-  resetOutputBox();
 }
 
 palindromeBtn.onclick = palindrome;
 
 function sum() {
-  resetColors();
+  
 
   let num = input.value;
   let total = 0;
@@ -123,7 +108,7 @@ function sum() {
 sumBtn.onclick = sum;
 
 function reverse() {
-  resetColors();
+  
 
   let num = input.value;
   let revNum = "";
@@ -137,3 +122,20 @@ function reverse() {
 }
 
 reverseBtn.onclick = reverse;
+
+function factors() {
+
+  let num = Number(input.value);
+  let allFactors = [];
+
+  for ( let i = 1 ; i <= num ; i++ ) {
+    if ( num % i === 0 ) {
+      allFactors.push(i);
+    }
+  }
+  let factorsString = allFactors.toString();
+
+  output.innerText = `The Factors of ${num} are -- ${factorsString}`
+}
+
+factorsBtn.onclick = factors;
