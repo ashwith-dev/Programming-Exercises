@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Analytics Dashboard</title>
+<script src="/charts/chart.js"></script>
+
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    height: 100vh;
+    overflow: hidden; /* desktop: no scroll */
+    padding: 10px;
+}
+
+/* TITLE */
+h1 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+/* DASHBOARD GRID */
+.dashboard {
+    height: calc(100vh - 60px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 12px;
+}
+
+/* CARD */
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CANVAS */
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+    }
+
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        height: auto;
+    }
+
+    .card {
+        height: 260px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+        height: auto;
+    }
+
+    .card {
+        height: 240px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>📊 Clothing & Sports Analytics Dashboard</h1>
+
+<div class="dashboard">
+    <div class="card"><canvas id="c1"></canvas></div>
+    <div class="card"><canvas id="c2"></canvas></div>
+    <div class="card"><canvas id="c3"></canvas></div>
+    <div class="card"><canvas id="c4"></canvas></div>
+    <div class="card"><canvas id="c5"></canvas></div>
+    <div class="card"><canvas id="c6"></canvas></div>
+    <div class="card"><canvas id="c7"></canvas></div>
+    <div class="card"><canvas id="c8"></canvas></div>
+    <div class="card"><canvas id="c9"></canvas></div>
+</div>
+
+<script>
+/* COMMON DATA */
+const skus = ['T-Shirt', 'Jeans', 'Jacket', 'Hoodie', 'Shorts'];
+
+/* 1 PIE – Sales Share */
+new Chart(c1, {
+    type: 'pie',
+    data: {
+        labels: skus,
+        datasets: [{ data: [30,20,15,25,10] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+/* 2 BAR – Monthly Sales */
+new Chart(c2, {
+    type: 'bar',
+    data: {
+        labels: skus,
+        datasets: [{ label: 'Units Sold', data: [500,300,200,400,250] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+/* 3 LINE – Revenue Trend */
+new Chart(c3, {
+    type: 'line',
+    data: {
+        labels: ['Jan','Feb','Mar','Apr','May'],
+        datasets: [{
+            label: 'Revenue (₹)',
+            data: [50000,62000,58000,72000,81000],
+            tension: 0.3
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+/* 4 HORIZONTAL BAR – Stock */
+new Chart(c4, {
+    type: 'bar',
+    data: {
+        labels: skus,
+        datasets: [{ label: 'Stock', data: [120,90,60,80,100] }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+
+/* 5 DOUGHNUT – Profit Margin */
+new Chart(c5, {
+    type: 'doughnut',
+    data: {
+        labels: skus,
+        datasets: [{ data: [40,30,35,45,25] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+/* 6 RADAR – Ratings */
+new Chart(c6, {
+    type: 'radar',
+    data: {
+        labels: skus,
+        datasets: [{ label: 'Rating', data: [4.5,4.2,4.8,4.6,4.1] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+/* 7 SCATTER – Price vs Sales */
+new Chart(c7, {
+    type: 'scatter',
+    data: {
+        datasets: [{
+            label: 'Price vs Sales',
+            data: [
+                {x:20,y:500},{x:45,y:300},
+                {x:80,y:200},{x:60,y:400},{x:30,y:250}
+            ]
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+/* 8 BUBBLE – SKU Performance */
+new Chart(c8, {
+    type: 'bubble',
+    data: {
+        datasets: [{
+            label: 'Performance',
+            data: [
+                {x:20,y:500,r:15},
+                {x:45,y:300,r:12},
+                {x:80,y:200,r:10},
+                {x:60,y:400,r:14},
+                {x:30,y:250,r:11}
+            ]
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+/* 9 LINE – CRICKET MATCH (50 OVERS) */
+/* -------- Overs -------- */
+const overs = [];
+for (let i = 1; i <= 25; i++) overs.push(i);
+
+/* -------- Team A (Smooth curve) -------- */
+const teamAScore = [
+  12,18,36,45,68,
+  75,70,125,126,142,
+  155,160,160,195,210,
+  225,240,255,270,285,
+  300,310,320,330,340
+];
+
+const teamAWickets = [5,11,12,18,20,22,25];
+const teamAWicketPoints = teamAScore.map((v, i) =>
+  teamAWickets.includes(i + 1) ? v + 8 : null
+);
+
+/* -------- Team B (Step-like curve) -------- */
+const teamBScore = [
+   20,40,55,80,86,
+  80,82,110,125,138,
+  152,168,182,195,208
+];
+
+
+while (teamBScore.length < 50) teamBScore.push(null);
+
+const teamBWickets = [5,11,12,15];
+const teamBWicketPoints = teamBScore.map((v, i) =>
+  teamBWickets.includes(i + 1) ? v + 8 : null
+);
+
+/* -------- Chart -------- */
+new Chart(c9, {
+  type: 'line',
+  data: {
+    labels: overs,
+    datasets: [
+      {
+        label: 'Team A Score',
+        data: teamAScore,
+        borderColor: '#1e88e5',
+        tension: 0.6,          // ✅ smooth curve
+        pointRadius: 0,
+        borderWidth: 2
+      },
+      {
+        label: 'Team A Wickets',
+        data: teamAWicketPoints,
+        backgroundColor: '#d32f2f',
+        pointRadius: 6,
+        pointStyle: 'triangle',
+        showLine: false
+      },
+      {
+        label: 'Team B Score',
+        data: teamBScore,
+        borderColor: '#43a047',
+        stepped: true,         // ✅ step-style curve
+        pointRadius: 0,
+        borderDash: [6, 6],
+        borderWidth: 2
+      },
+      {
+        label: 'Team B Wickets',
+        data: teamBWicketPoints,
+        backgroundColor: '#d32f2f',
+        pointRadius: 6,
+        pointStyle: 'triangle',
+        showLine: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'top' }
+    },
+    scales: {
+      x: {
+        title: { display: true, text: 'Overs' }
+      },
+      y: {
+        title: { display: true, text: 'Runs' }
+      }
+    }
+  }
+});
+
+
+</script>
+
+</body>
+</html>
