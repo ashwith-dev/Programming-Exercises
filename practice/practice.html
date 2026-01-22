@@ -2,29 +2,156 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Analytics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        canvas {
+            max-width: 80%;
+            max-height: 70%;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <p>This is a Document</p>
-        <p id="result"></p>
-        <p>Good Morning</p>
+
+<h1>📊 Analytics Dashboard</h1>
+
+<div class="dashboard">
+
+    <!-- Pie Chart -->
+    <div class="card">
+        <h3>Pie Chart - Market Share</h3>
+        <canvas id="pieChart"></canvas>
     </div>
-    <script>
-        let name = window.prompt("Enter Your Name : ")
 
-        function print() {
-            document.getElementById("result").innerText = `Hello ${name}`;
+    <!-- Bar Chart -->
+    <div class="card">
+        <h3>Bar Graph - Monthly Sales</h3>
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <!-- Line Graph -->
+    <div class="card">
+        <h3>Line Graph - Website Traffic</h3>
+        <canvas id="lineChart"></canvas>
+    </div>
+
+    <!-- Multi Line Graph -->
+    <div class="card">
+        <h3>Multi-Line Graph - Performance Comparison</h3>
+        <canvas id="multiLineChart"></canvas>
+    </div>
+
+    <!-- Horizontal Bar Graph -->
+    <div class="card">
+        <h3>Horizontal Bar - Quarterly Revenue</h3>
+        <canvas id="horizontalBarChart"></canvas>
+    </div>
+
+</div>
+
+<script>
+    /* Pie Chart */
+    new Chart(document.getElementById('pieChart'), {
+        type: 'pie',
+        data: {
+            labels: ['Product A', 'Product B', 'Product C', 'Product D'],
+            datasets: [{
+                data: [30, 25, 20, 25],
+                backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0']
+            }]
         }
+    });
 
-        setTimeout(print , 3000);
-
-        function repeat() {
-            console.log(`Hello ${name}`);
+    /* Bar Chart */
+    new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Sales',
+                data: [120, 190, 300, 250, 220, 310],
+                backgroundColor: '#36a2eb'
+            }]
         }
+    });
 
-        setInterval(repeat , 3000)
-    </script>
+    /* Line Chart */
+    new Chart(document.getElementById('lineChart'), {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Visitors',
+                data: [200, 450, 300, 500, 400, 600, 700],
+                borderColor: '#ff6384',
+                fill: false
+            }]
+        }
+    });
+
+    /* Multi-Line Chart */
+    new Chart(document.getElementById('multiLineChart'), {
+        type: 'line',
+        data: {
+            labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+            datasets: [
+                {
+                    label: 'Team A',
+                    data: [65, 75, 70, 90],
+                    borderColor: '#36a2eb',
+                    fill: false
+                },
+                {
+                    label: 'Team B',
+                    data: [55, 60, 80, 85],
+                    borderColor: '#ffce56',
+                    fill: false
+                }
+            ]
+        }
+    });
+
+    /* Horizontal Bar Chart */
+    new Chart(document.getElementById('horizontalBarChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Sunday', 'Monday', 'Q3', 'Q4'],
+            datasets: [{
+                label: 'Revenue ($K)',
+                data: [120, 190, 300, 250],
+                backgroundColor: '#ff9f40'
+            }]
+        },
+        options: {
+            indexAxis: 'y'
+        }
+    });
+</script>
+
 </body>
 </html>
