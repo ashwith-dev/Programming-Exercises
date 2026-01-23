@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Free Distance Calculator</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: white;
+      padding: 25px;
+      width: 350px;
+      border-radius: 10px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background: #2c7be5;
+      color: white;
+      border: none;
+    }
+    button:hover{
+        cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h3>FREE Distance & Time</h3>
+
+    <input id="from" placeholder="From location" />
+    <input id="to" placeholder="To location" />
+
+    <button onclick="calc()">Calculate</button>
+
+    <p id="result"></p>
+  </div>
+
+<script>
+async function calc() {
+  const from = document.getElementById("from").value;
+  const to = document.getElementById("to").value;
+
+  const res = await fetch("/calculate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ origin: from, destination: to })
+  });
+
+  const data = await res.json();
+
+  if (data.error) {
+    document.getElementById("result").innerText = data.error;
+  } else {
+    document.getElementById("result").innerHTML =
+      `Distance: ${data.distance_km}<br>
+       Time: ${data.duration_min}`;
+  }
+}
+</script>
+
+</body>
+</html>
