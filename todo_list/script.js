@@ -19,7 +19,7 @@ function addTodo() {
 }
 
 function show() {
-    list.innerHTML = "";
+    list.innerHTML = ""
 
     for (let i = 0; i < todos.length; i++) {
         list.innerHTML += (i + 1) + ". " + todos[i]+ "<br>";
