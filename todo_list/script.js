@@ -2,7 +2,12 @@ const input = document.getElementById("input");
 const btn = document.getElementById("addBtn");
 const list = document.getElementById("list");
 
-let todos = [];
+let todos = [
+    {
+        id : 1,
+        todo: 'Walking'
+    },
+];
 
 function addTodo() {
     let inputText = input.value;
@@ -12,7 +17,11 @@ function addTodo() {
         return;
     }
 
-    todos.push(inputText);
+    todos.push({
+        id : todos.length + 1,
+        todo: inputText
+    }
+    );
     input.value = "";
 
     show();
@@ -22,8 +31,8 @@ function show() {
     list.innerHTML = ""
 
     for (let i = 0; i < todos.length; i++) {
-        list.innerHTML += (i + 1) + ". " + todos[i]+ "<br>";
+        list.innerHTML += todos[i].id + " . " + todos[i].todo+ "<br>";
     }
 }
 
-
+show();
