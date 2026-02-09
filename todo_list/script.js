@@ -1,38 +1,38 @@
 const input = document.getElementById("input");
-const btn = document.getElementById("addBtn");
+const add = document.getElementById("addBtn");
 const list = document.getElementById("list");
 
-let todos = [
+
+let todo_list = [
     {
-        id : 1,
+        id: 1,
         todo: 'Walking'
     },
 ];
 
-function addTodo() {
-    let inputText = input.value;
-
-    if (inputText == "") {
-        alert("Please enter a todo");
-        return;
+function add_todo() {
+    let new_todo = input.value;
+    
+    if(new_todo == ""){
+        alert('You Input Box Is Input,Please Write Something To Add');
     }
+ 
+    todo_list.push({
+        id: todo_list.length + 1,
+        todo: new_todo
+    });
 
-    todos.push({
-        id : todos.length + 1,
-        todo: inputText
-    }
-    );
-    input.value = "";
+    input.innerHTML = "";
+    showTodo();
 
-    show();
 }
 
-function show() {
-    list.innerHTML = ""
+function showTodo(){
+    list.innerHTML = "";
+    for ( i = 0; i<todo_list.length; i++ ){
+        list.innerHTML += todo_list[i].id + '. ' + todo_list[i].todo + '<br>' ;
+    };
 
-    for (let i = 0; i < todos.length; i++) {
-        list.innerHTML += todos[i].id + " . " + todos[i].todo+ "<br>";
-    }
 }
 
-show();
+showTodo();
