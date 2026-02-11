@@ -31,7 +31,7 @@ function showTodo(){
 
     list.innerHTML = "";
     for ( i = 0; i<todo_list.length; i++ ){
-        list.innerHTML += todo_list[i].id + '. ' + todo_list[i].todo + `<button onclick=delete_todo(${todo_list[i].id})>-</button>`+'<br>';
+        list.innerHTML +=  + '->' + todo_list[i].todo + `<button onclick=delete_todo(${todo_list[i].id})>-</button>`+'<br>';
     };
 
 }
