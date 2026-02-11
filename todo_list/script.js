@@ -22,16 +22,29 @@ function add_todo() {
         todo: new_todo
     });
 
-    input.innerHTML = "";
+    input.value = "";
     showTodo();
 
 }
 
 function showTodo(){
+
     list.innerHTML = "";
     for ( i = 0; i<todo_list.length; i++ ){
-        list.innerHTML += todo_list[i].id + '. ' + todo_list[i].todo + '<br>' ;
+        list.innerHTML += todo_list[i].id + '. ' + todo_list[i].todo + `<button onclick=delete_todo(${todo_list[i].id})>-</button>`+'<br>';
     };
+
+}
+
+function delete_todo(id){
+    let new_todos_list = todo_list.filter(function(item) {
+        if ( id != item.id){
+            return item;
+        }
+    });
+
+    todo_list = new_todos_list;
+    showTodo()
 
 }
 
